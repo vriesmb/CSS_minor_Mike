@@ -73,13 +73,16 @@ transition all geeft een transition op alle gewenste elementen
 en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color */
 
 .cube {
-  --pressure-color: #898989;
+  --pressure-color: #787878;
   background: var(--pressure-color);
   height: 100px;
-  background: linear-gradient(to bottom, #656565, var(--pressure-color));
+  background: linear-gradient(to bottom, #65656525, var(--pressure-color)),
+    url(/images/brushed_texture.png);
+  background-size: 100%;
+  background-position: top;
 
-  width: 30px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   transform-style: preserve-3d;
   transform: translateZ(150px) translatex(0) translateY(0) rotatex(3deg)
     rotatey(0deg) rotateZ(0deg);
@@ -92,7 +95,8 @@ en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color */
     animation: testje 1s both;
     transition: all 0.5s, --pressure-color 0.5s;
 
-    --pressure-color: rgb(76, 76, 76);
+    background-size: 103%;
+    --pressure-color: rgb(44, 44, 44);
   }
 }
 
@@ -113,9 +117,9 @@ en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color */
   }
 } */
 
-label {
+/* label {
   border-radius: 15px;
-}
+} */
 
 body section section div {
   /* border: silver 4px solid; */
@@ -190,15 +194,14 @@ section
   border-bottom: 2px rgb(120, 120, 120) solid;
 }
 
-section
+/* section
   > section:last-child:has(input[value="stop"]:checked)
   label:nth-of-type(2) {
   background: #979bb6;
-  /* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
   transition: background 1s;
   border-top: 5px rgb(120, 120, 120) solid;
   border-bottom: 2px rgb(120, 120, 120) solid;
-}
+} */
 
 /* in background gradient --custom property toevoegen en on hover de kleur switchen. */
 
@@ -212,12 +215,11 @@ section
   border-bottom: 2px rgb(120, 120, 120) solid;
 }
 
-label:nth-of-type(1) {
+/* label:nth-of-type(1) {
   background: #f4f1f2;
-  /* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
   transition: background 1s;
   border-bottom: 5px rgb(120, 120, 120) solid;
-}
+} */
 
 label:nth-of-type(2) {
   background: #f4f1f2;
