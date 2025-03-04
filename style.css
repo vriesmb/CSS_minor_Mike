@@ -1,0 +1,241 @@
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/GeistMono_var.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "GeistMono", monospace;
+}
+
+/* ALGEMENE REGELS */
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: -webkit-radial-gradient(
+    50% 50%,
+    ellipse cover,
+    transparent,
+    rgba(0, 0, 0, 0.465)
+  );
+  background-color: rgb(58, 58, 58);
+}
+
+/* OPZET VOOR CONTROLPANEEL */
+body > section {
+  width: 400px;
+  height: 650px;
+  border: black solid 4px;
+  /* border-radius: 20% 5%; */
+  background-color: rgb(161, 161, 161);
+}
+
+/* / 1E SECTIE VAN CONTROLAPNEEL */
+section > section:first-child {
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  grid-template-columns: 80px 3fr 80px;
+  height: 70%;
+}
+
+/* / 2E SECTIE VAN CONTROLAPNEEL */
+section > section:last-child {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 30%;
+}
+
+section > section:last-child input[type="radio"] {
+  opacity: 0;
+}
+
+/* section > section:last-child input[type="radio"]:checked {
+  svg {
+    fill: white;
+  }
+} */
+
+@property --pressure-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: lime;
+}
+
+/* principe animatie samen bedacht met Roel,
+later Sanne geholpen om de fadeout animatie te laten werken. 
+We hebben de code in principe 'versimpeld' en transiton gebruikt.
+transition all geeft een transition op alle gewenste elementen
+en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color */
+
+.cube {
+  --pressure-color: #898989;
+  background: var(--pressure-color);
+  height: 100px;
+  background: linear-gradient(to bottom, #656565, var(--pressure-color));
+
+  width: 30px;
+  height: 150px;
+  transform-style: preserve-3d;
+  transform: translateZ(150px) translatex(0) translateY(0) rotatex(3deg)
+    rotatey(0deg) rotateZ(0deg);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 12px 20px 1px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s, --pressure-color 0.2s;
+
+  &:hover {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    animation: testje 1s both;
+    transition: all 0.5s, --pressure-color 0.5s;
+
+    --pressure-color: rgb(76, 76, 76);
+  }
+}
+
+/* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+
+/* @keyframes pressureAnimation {
+  to {
+    transform: translateZ(150px) translatex(0) translateY(0) rotatex(3deg)
+      rotatey(0deg) rotateZ(0deg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 12px 20px 1px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes cancelPressureAnimation {
+  to {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+  }
+} */
+
+label {
+  border-radius: 15px;
+}
+
+body section section div {
+  /* border: silver 4px solid; */
+  grid-area: 2 / 2;
+  /* aspect-ratio: 1; */
+  height: 250px;
+  width: 250px;
+  border-radius: 100%;
+  background-image: linear-gradient(
+    var(--cd-dark-color) 0%,
+    var(--cd-dark-color) var(--cd-start-shine),
+    var(--cd-light-color) 50%,
+    var(--cd-dark-color) var(--cd-end-shine),
+    var(--cd-dark-color) 100%
+  );
+  animation: spin 8s linear infinite;
+}
+
+@property --cd-dark-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: gray;
+}
+
+@property --cd-light-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: silver;
+}
+
+@property --cd-start-shine {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 35%;
+}
+@property --cd-end-shine {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 65%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    --cd-dark-color: rgb(124, 123, 123);
+    --cd-light-color: rgba(192, 192, 192, 0.22);
+    --cd-start-shine: 35%;
+    --cd-end-shine: 65%;
+  }
+  50% {
+    --cd-light-color: rgba(227, 227, 227, 0.371);
+    --cd-dark-color: rgb(117, 117, 117);
+    --cd-start-shine: 45%;
+    --cd-end-shine: 55%;
+  }
+  100% {
+    transform: rotate(360deg);
+    --cd-dark-color: rgb(124, 123, 123);
+    --cd-light-color: rgba(192, 192, 192, 0.593);
+    --cd-start-shine: 35%;
+    --cd-end-shine: 65%;
+  }
+}
+
+section
+  > section:last-child:has(input[value="record"]:checked)
+  label:nth-of-type(1) {
+  background: #979bb6;
+  /* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
+  transition: background 1s;
+  border-top: 5px rgb(120, 120, 120) solid;
+  border-bottom: 2px rgb(120, 120, 120) solid;
+}
+
+section
+  > section:last-child:has(input[value="stop"]:checked)
+  label:nth-of-type(2) {
+  background: #979bb6;
+  /* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
+  transition: background 1s;
+  border-top: 5px rgb(120, 120, 120) solid;
+  border-bottom: 2px rgb(120, 120, 120) solid;
+}
+
+/* in background gradient --custom property toevoegen en on hover de kleur switchen. */
+
+section
+  > section:last-child:has(input[value="play"]:checked)
+  label:nth-of-type(3) {
+  background: #979bb6;
+  /* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
+  transition: background 1s;
+  border-top: 5px rgb(120, 120, 120) solid;
+  border-bottom: 2px rgb(120, 120, 120) solid;
+}
+
+label:nth-of-type(1) {
+  background: #f4f1f2;
+  /* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
+  transition: background 1s;
+  border-bottom: 5px rgb(120, 120, 120) solid;
+}
+
+label:nth-of-type(2) {
+  background: #f4f1f2;
+  /* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
+  transition: background 1s;
+  border-bottom: 5px rgb(120, 120, 120) solid;
+}
+
+label:nth-of-type(3) {
+  background: #f4f1f2;
+  /* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
+  transition: background 1s;
+  border-bottom: 5px rgb(120, 120, 120) solid;
+}
+/* 
+section > section:last-child {
+  border: solid red 1px;
+} */
+
+/* slider scrollbased animation ofzo. */
+/* styling van playing button ook net als rec ingedrukt */
