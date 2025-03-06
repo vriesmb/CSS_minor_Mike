@@ -1,3 +1,34 @@
+# CSS Technieken
+
+- [x] :has()
+- [ ] Style (container queries)
+
+  > /_ styling .card based on the value of --theme on .card-container _/
+  > @container style(--theme: warm) {
+  > .card {
+  > background-color: wheat;
+  > border-color: brown;
+  > ...
+  > }
+  > }
+
+- [x] Custom Properties
+- [x] 3D Transforms
+
+# Conceptuitwerking
+
+Video/Audio player met customizable visualiser op de achtergrond.
+
+Ik wil met het uiterlijk van de player op detail ingaan.
+
+- Knoppen krijgen diepte, bij indrukken.
+- Knoppen krijgen een herkenbare beweging bij het indrukken en terugspringen.
+- Player krijgt een herkenbaar uiterlijk & affordance
+
+De player kan gestart worden, gestopt worden, maar ook opnemen. Alle 3 de inputs krijgen andere details.
+
+Mocht ik tijd hebben wil ik de achtergrond customizable maken met sliders.
+
 # Notes
 
 ### CSS & Feedback van Sanne
