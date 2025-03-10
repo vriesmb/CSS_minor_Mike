@@ -151,3 +151,34 @@ button click en gradient change.
 principe animatie samen bedacht met Roel,
 later heeft Sanne me geleerd en geholpen om de fadeout animatie te laten werken. We hebben de code in principe 'versimpeld' en transiton gebruikt. transition all geeft een transition op alle gewenste elementen
 en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color
+
+### 10 Maart in les
+
+- Nils Binder
+
+wrapper max width.
+Wrapper centered in the website.
+
+.warpper{
+width: min(100% - 3rem, 75rem);
+margin-inline: auto;
+}
+
+3rem —wrapper-max var
+custom property
+
+padding 1.5 rem
+var(2x —padding)
+
+ipv
+
+..wrapper{
+max-width: 75rem;
+margin 0 auto
+padding 0 1.5rem
+}
+
+ultra wide sizing met wrapper
+
+minmax(0, clamp (24rem, 75%, 44rem));
+desired is the middel one, but at least 24rem and maximum 44rem
