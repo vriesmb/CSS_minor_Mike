@@ -66,7 +66,10 @@ We hebben de code in principe 'versimpeld' en transiton gebruikt.
 transition all geeft een transition op alle gewenste elementen
 en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color */
 
-section section:nth-of-type(2) label {
+/* section section:nth-of-type(2) label:has(input[type="radio"]) { */
+label:has([value="stop"]),
+label:has([value="play"]),
+label:has([value="record"]) {
   --pressure-color: #787878;
   background: var(--pressure-color);
   height: 100px;
@@ -82,7 +85,65 @@ section section:nth-of-type(2) label {
   box-shadow: 0 0 20px rgb(0 0 0 / 9%), 0 2px 2px 1px rgb(0 0 0 / 18%);
   transition: all 0.2s, --pressure-color 0.2s;
 
-  &:hover {
+  /* &:checked {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    animation: testje 1s both;
+    transition: all 0.5s, --pressure-color 0.5s;
+
+    background-size: 103%;
+    --pressure-color: rgb(44, 44, 44);
+  } */
+}
+
+html:has([value="stop"]:checked) {
+  --pressureStop: true;
+}
+
+html:has([value="record"]:checked) {
+  --pressureRecord: true;
+}
+
+html:has([value="play"]:checked) {
+  --pressurePlay: true;
+}
+
+@container style(--pressureStop:true) {
+  label:has([value="stop"]) {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    animation: testje 1s both;
+    transition: all 0.5s, --pressure-color 0.5s;
+
+    background-size: 103%;
+    --pressure-color: rgb(44, 44, 44);
+  }
+}
+
+@container style(--pressureRecord:true) {
+  label:has([value="record"]) {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    animation: testje 1s both;
+    transition: all 0.5s, --pressure-color 0.5s;
+
+    background-size: 103%;
+    --pressure-color: rgb(44, 44, 44);
+  }
+
+  label:has([value="[play]"]) {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    animation: testje 1s both;
+    transition: all 0.5s, --pressure-color 0.5s;
+
+    background-size: 103%;
+    --pressure-color: rgb(44, 44, 44);
+  }
+}
+
+@container style(--pressurePlay:true) {
+  label:has([value="play"]) {
     transform: translateZ(0px) rotatez(0deg);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
     animation: testje 1s both;
@@ -177,16 +238,19 @@ body section section div {
   }
 }
 
-section
+/* section
   > section:last-child:has(input[value="record"]:checked)
   label:nth-of-type(1) {
-  background: #979bb6;
-  /* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
-  transition: background 1s;
-  border-top: 5px rgb(120, 120, 120) solid;
-  border-bottom: 2px rgb(120, 120, 120) solid;
-}
+  transform: translateZ(0px) rotatez(0deg);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+  animation: testje 1s both;
+  transition: all 0.5s, --pressure-color 0.5s;
 
+  background-size: 103%;
+  --pressure-color: rgb(44, 44, 44);
+} */
+
+/* ------------------------------------- */
 /* section
   > section:last-child:has(input[value="stop"]:checked)
   label:nth-of-type(2) {
@@ -198,15 +262,15 @@ section
 
 /* in background gradient --custom property toevoegen en on hover de kleur switchen. */
 
-section
+/* section
   > section:last-child:has(input[value="play"]:checked)
   label:nth-of-type(3) {
-  background: #979bb6;
-  /* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
-  transition: background 1s;
+  background: #979bb6; */
+/* background: linear-gradient(135deg, #979bb6, #f4f1f2); */
+/* transition: background 1s;
   border-top: 5px rgb(120, 120, 120) solid;
   border-bottom: 2px rgb(120, 120, 120) solid;
-}
+} */
 
 /* label:nth-of-type(1) {
   background: #f4f1f2;
@@ -214,19 +278,20 @@ section
   border-bottom: 5px rgb(120, 120, 120) solid;
 } */
 
-label:nth-of-type(2) {
-  background: #f4f1f2;
-  /* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
-  transition: background 1s;
-  /* border-bottom: 5px rgb(120, 120, 120) solid; */
-}
+/* label:nth-of-type(2) {
+  background: #f4f1f2; */
+/* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
+/* transition: background 1s; */
+/* border-bottom: 5px rgb(120, 120, 120) solid; */
+/* / */
 
-label:nth-of-type(3) {
-  background: #f4f1f2;
-  /* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
-  transition: background 1s;
-  /* border-bottom: 5px rgb(120, 120, 120) solid; */
-}
+/* label:nth-of-type(3) { */
+/* background: #f4f1f2; */
+/* background: linear-gradient(80deg, #979bb6, #f4f1f2); */
+/* transition: background 1s; */
+/* border-bottom: 5px rgb(120, 120, 120) solid; */
+/* } */
+
 /* 
 section > section:last-child {
   border: solid red 1px;
