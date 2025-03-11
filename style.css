@@ -32,14 +32,16 @@ body > section {
   height: 650px;
   border: black solid 4px;
   background-color: rgb(161, 161, 161);
+  background: linear-gradient(180deg, #0000008a, #000000ab),
+    url(/images/brushed_texture.png);
 }
 
 /* / 1E SECTIE VAN CONTROLAPNEEL */
 section > section:first-child {
   display: grid;
   grid-template-rows: 80px 1fr;
-  grid-template-columns: 80px 3fr 80px;
   height: 70%;
+  grid-template-columns: 1fr 3fr 1fr;
 }
 
 /* / 2E SECTIE VAN CONTROLAPNEEL */
@@ -58,6 +60,12 @@ section > section:last-child input[type="radio"] {
   syntax: "<color>";
   inherits: true;
   initial-value: lime;
+}
+
+svg {
+  fill: #231f20;
+  stroke-width: 0px;
+  scale: 0.6;
 }
 
 /* principe animatie samen bedacht met Roel,
@@ -111,19 +119,24 @@ html:has([value="play"]:checked) {
 @container style(--pressureStop:true) {
   label:has([value="stop"]) {
     transform: translateZ(0px) rotatez(0deg);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent; */
     animation: testje 1s both;
     transition: all 0.5s, --pressure-color 0.5s;
 
     background-size: 103%;
     --pressure-color: rgb(44, 44, 44);
+  }
+
+  body section section div {
+    animation: spin 14s linear infinite;
+    animation-play-state: paused;
   }
 }
 
 @container style(--pressureRecord:true) {
   label:has([value="record"]) {
     transform: translateZ(0px) rotatez(0deg);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
+    /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent; */
     animation: testje 1s both;
     transition: all 0.5s, --pressure-color 0.5s;
 
@@ -131,18 +144,6 @@ html:has([value="play"]:checked) {
     --pressure-color: rgb(44, 44, 44);
   }
 
-  label:has([value="[play]"]) {
-    transform: translateZ(0px) rotatez(0deg);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
-    animation: testje 1s both;
-    transition: all 0.5s, --pressure-color 0.5s;
-
-    background-size: 103%;
-    --pressure-color: rgb(44, 44, 44);
-  }
-}
-
-@container style(--pressurePlay:true) {
   label:has([value="play"]) {
     transform: translateZ(0px) rotatez(0deg);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent;
@@ -151,6 +152,28 @@ html:has([value="play"]:checked) {
 
     background-size: 103%;
     --pressure-color: rgb(44, 44, 44);
+  }
+
+  body section section div {
+    animation: spin 14s linear infinite;
+    animation-play-state: running;
+  }
+}
+
+@container style(--pressurePlay:true) {
+  label:has([value="play"]) {
+    transform: translateZ(0px) rotatez(0deg);
+    /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent; */
+    animation: testje 1s both;
+    transition: all 0.5s, --pressure-color 0.5s;
+
+    background-size: 103%;
+    --pressure-color: rgb(44, 44, 44);
+  }
+
+  body section section div {
+    animation: spin 14s linear infinite;
+    animation-play-state: running;
   }
 }
 
@@ -179,17 +202,42 @@ body section section div {
   /* border: silver 4px solid; */
   grid-area: 2 / 2;
   /* aspect-ratio: 1; */
+  border: #b8b8b81c 4px dotted;
   height: 250px;
   width: 250px;
   border-radius: 100%;
+  /* background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(101, 101, 101, 0) 3%,
+      rgba(0, 0, 0, 1) 5%,
+      rgba(59, 59, 59, 1) 93%,
+      rgba(0, 0, 0, 1) 94%,
+      rgba(238, 130, 238, 0) 100%
+    ),
+    linear-gradient(
+      var(--cd-dark-color) 0%,
+      var(--cd-dark-color) var(--cd-start-shine),
+      var(--cd-light-color) 50%,
+      var(--cd-dark-color) var(--cd-end-shine)
+    ); */
+
   background-image: linear-gradient(
-    var(--cd-dark-color) 0%,
-    var(--cd-dark-color) var(--cd-start-shine),
-    var(--cd-light-color) 50%,
-    var(--cd-dark-color) var(--cd-end-shine),
-    var(--cd-dark-color) 100%
-  );
-  animation: spin 8s linear infinite;
+      135deg,
+      rgba(180, 180, 180, 0) 40%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(180, 180, 180, 0) 60%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(101, 101, 101, 0) 3%,
+      rgba(0, 0, 0, 1) 5%,
+      rgba(59, 59, 59, 1) 93%,
+      rgba(0, 0, 0, 1) 94%,
+      rgba(238, 130, 238, 0) 100%
+    );
+  /* background-blend-mode: screen; */
 }
 
 @property --cd-dark-color {

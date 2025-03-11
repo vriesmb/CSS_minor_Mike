@@ -182,3 +182,9 @@ ultra wide sizing met wrapper
 
 minmax(0, clamp (24rem, 75%, 44rem));
 desired is the middel one, but at least 24rem and maximum 44rem
+
+- Sanne
+  heeft me style queries geleerd.
+  ik heb values meegegeven en deze gebruik ik om dan de styling toe te passen op de juiste elementen zonder lange selectoren te gebruiken
+
+bijv. @container style(--pressureRecord:true)
