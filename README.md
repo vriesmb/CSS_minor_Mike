@@ -1,7 +1,7 @@
 # CSS Technieken
 
 - [x] :has()
-- [ ] Style (container queries)
+- [x] Style (container queries)
 
   > /_ styling .card based on the value of --theme on .card-container _/
   > @container style(--theme: warm) {
@@ -188,3 +188,36 @@ desired is the middel one, but at least 24rem and maximum 44rem
   ik heb values meegegeven en deze gebruik ik om dan de styling toe te passen op de juiste elementen zonder lange selectoren te gebruiken
 
 bijv. @container style(--pressureRecord:true)
+
+### Notes 14 Maart Sanne
+
+svg filter heading squiggly?
+
+gradient effects op toets als je indrukt aan zijkant
+
+responsive design
+
+@layer basis laag fonts colors
+
+@layer module, state;
+state is belangrijker dan module
+
+zelf verzonnen termen achterste wint
+
+— zelf bedacht met streepjes ervoor
+
+keer oefenen niet nodig
+
+button extra laag erover met kleine transparantie voor diepte effect tvanicoon . heel dun 10% zichtbaar
+
+@property --a {
+syntax: '<angle>';
+inherits: false;
+initial-value: 10deg;
+}
+
+angel voor type, dan kan ik degrees aanpassen van cd shine
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
+
+voor layout responsive
