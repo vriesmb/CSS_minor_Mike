@@ -1,3 +1,5 @@
+# Sanne heeft gezegd dat responsive huidige methode okey is voor mij, ik snap het principe maar kon niet meer ombouwen door hergebruik van elementen. Volgende project gewoon: klein beginnnen en hoe groter je gaat min-width gebruiken op @media.
+
 # CSS Technieken
 
 - [x] :has()

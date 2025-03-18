@@ -1,3 +1,22 @@
+/* ------------------ */
+/* TO DO */
+/* ------------------ */
+/* [ ] - Heading naar cooper en animaten pas als player draait
+   [ ] - Teskt in cd cooper maken
+   [ ] - Button SVG's stylen
+   [ ] - Button click effect met beetje transparantie voor diepte toevoegen
+     
+
+
+
+
+
+*/
+
+/* ------------------ */
+/* FONTS */
+/* ------------------ */
+
 @font-face {
   font-family: "GeistMono";
   src: url("/fonts/GeistMono_var.ttf") format("truetype");
@@ -5,13 +24,22 @@
   font-style: normal;
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300..700&display=swap'); */
+@font-face {
+  font-family: "Cooper";
+  src: url("/fonts//Cooper.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+}
 
 @font-face {
   font-family: "Josefin";
   src: url("/fonts/josefin.ttf");
   
 }
+
+/* ------------------ */
+/* ALGEMENE REGELS */
+/* ------------------ */
 
 h1 {
   font-family: "Josefin";
@@ -21,23 +49,6 @@ h1 {
   color: white;
 }
 
-@property --font-weight-variable {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 300;
-}
-
-@keyframes fontVariation {
-  0% {
-    --font-weight-variable: 300;
-  }
-
-  100% {
-    --font-weight-variable: 700;
-  }
-}
-
-/* ALGEMENE REGELS */
 body {
   height: 100vh;
   display: flex;
@@ -51,6 +62,93 @@ body {
     rgba(0, 0, 0, 0.465)
   );
   background-color: rgb(58, 58, 58);
+}
+
+/* ------------------ */
+/* @PROPERTY */
+/* ------------------ */
+
+@property --font-weight-variable {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 300;
+}
+
+@property --pressure-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: lime;
+  /* initial value lime om te testen of 
+  hij werkt en goed overschreven wordt */
+}
+
+@property --degrees-shine {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --cd-dark-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: gray;
+}
+
+@property --cd-light-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: silver;
+}
+
+@property --cd-start-shine {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 35%;
+}
+@property --cd-end-shine {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 65%;
+}
+
+@property --record-status {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d2d2d2b5;
+}
+
+/* ------------------ */
+/* @KEYFRAMES */
+/* ------------------ */
+
+@keyframes fontVariation {
+  0% {
+    --font-weight-variable: 300;
+  }
+
+  100% {
+    --font-weight-variable: 700;
+  }
+}
+
+@keyframes record_blink {
+  0%, 100% {
+    --record_blur_switch: 1px;
+    --record_blur_status: 40px;
+  } 50% {
+    --record_blur_switch: 50px;
+    --record_blur_status: 60px;
+  }
+}
+
+@keyframes degrees-shine {
+  0% {
+    --degrees-shine: 0deg;
+  }
+
+  100% {
+    --degrees-shine: 360deg;
+  }
 }
 
 /* OPZET VOOR CONTROLPANEEL */
@@ -80,14 +178,11 @@ section > section:last-child {
 }
 
 section > section:last-child input[type="radio"] {
-  opacity: 0;
+  visibility: hidden;
+  position: absolute;
 }
 
-@property --pressure-color {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: lime;
-}
+
 
 svg {
   fill: #231f20;
@@ -146,6 +241,8 @@ html:has([value="play"]:checked) {
 
 body section section div {
    animation: degrees-shine 8s infinite forwards linear;
+   animation-play-state: paused;
+   position: relative;
 }
 /* deze default state is nodig - hoog in de scope. 
 ik had deze in de style query omgeving, 
@@ -161,19 +258,19 @@ maar daardoor gaat de playstate moeilijk doen! */
     --pressure-color: rgb(44, 44, 44);
   }
 
-  body section section div {
+  body section section > div {
     animation-play-state: paused;
   }
   
 }
 
 @container style(--recordingStatus:true){
-  section section div{
+  section section > div{
     --record-status: red;
   }
 }
 
-section section div::after{
+section section > div::after{
   outline: var(--record-status) 4px dotted;
   
 }
@@ -206,12 +303,19 @@ section section div::after{
     --record-status: red;
     fill: var(--record-status);
     filter: blur(1px);
-    box-shadow: 0 0 26px #f008;
+    box-shadow: 0 0 var(--record_blur_switch) rgb(255, 0, 0);
+    animation: record_blink 2s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+    animation-delay: 2s;
     border-radius: 50%;
   }
 
-  section section div{
-    box-shadow: 0 0 40px #f008;
+  section section div div {
+    animation-play-state: running;
+  }
+
+  section section > div{
+    box-shadow: 0 0 var(--record_blur_status) #f008;
+    animation: record_blink 1s infinite;
   }
   
   label:has([value="play"]) {
@@ -235,7 +339,7 @@ section section div::after{
     }
   }
 
-  body section section div {
+  body section section > div {
     /* animation: spin 14s linear infinite; */
     /* animation-play-state: running; */
     animation: degrees-shine 8s infinite forwards linear;
@@ -243,9 +347,25 @@ section section div::after{
   }
 }
 
+@property --record_blur_switch {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 1px;
+}
+@property --record_blur_status {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 40px;
+}
+
 
 
 @container style(--pressurePlay:true) {
+
+   section section div div {
+    animation-play-state: running;
+  }
+
   label:has([value="play"]) {
     transform: translateZ(0px) rotatez(0deg);
     /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent; */
@@ -267,7 +387,7 @@ section section div::after{
     }
   }
 
-  body section section div {
+  body section section > div {
     animation-play-state: running;
     /* animation: spin 14s linear infinite; */
     /* animation-play-state: running; */
@@ -277,7 +397,7 @@ section section div::after{
 }
 
 
-body section section div {
+body section section > div {
   /* border: silver 4px solid; */
   grid-area: 2 / 2;
   /* aspect-ratio: 1; */
@@ -291,7 +411,8 @@ body section section div {
 
   background-image: linear-gradient(
       var(--degrees-shine),
-      rgba(180, 180, 180, 0) 40%,
+      rgba(180, 180, 180, 0)
+       40%,
       rgba(255, 255, 255, 0.236) 50%,
       rgba(180, 180, 180, 0) 60%
     ), 
@@ -308,50 +429,172 @@ body section section div {
     );
 }
 
-@keyframes degrees-shine {
-  0% {
-    --degrees-shine: 0deg;
+section section div div {
+    height: 150px;
+    width: 100px;
+    transform-origin: center right;
+    rotate: var(--degrees-shine);
+    /* animation: degrees-shine 8s infinite forwards linear; */
+    position: absolute;
+    top: 20.5%;
+    left: 10%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 580px) {
+  body > section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    gap: 1rem;
+    height: fit-content;
+    /* padding: 1rem; */
   }
 
-  100% {
-    --degrees-shine: 360deg;
+  section > section:first-child {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-left: 5vw;
+  }
+
+  section > section:last-child {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    height: 100%;
+    width: fit-content;
+  }
+
+  label:has([value="stop"]), label:has([value="play"]), label:has([value="record"]) {
+      height: 100px;
+      background: linear-gradient(to right, #65656596, var(--pressure-color)), url(/images/brushed_texture.png);
+      background-size: 100%;
+      background-position: top;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+      transform: translateZ(150px) translatex(0) translateY(0) rotatex(0deg) rotatey(0deg) rotateZ(0deg);
+      box-shadow: 0 0 20px rgb(0 0 0 / 9%), 0 2px 2px 1px rgb(0 0 0 / 18%);
+      transition: all 0.2s, --pressure-color 0.2s;
+  
+  }
+
+  svg{
+    scale: 0.45;
   }
 }
 
-@property --degrees-shine {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 0deg;
+
+
+@media screen and (max-width: 480px) {
+  section > section:last-child {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 100%;
 }
 
-@property --cd-dark-color {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: gray;
+section > section:first-child {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding-left: 0;  
 }
 
-@property --cd-light-color {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: silver;
+body > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  gap: 4rem;
+  height: fit-content;
+  padding-top: 3rem;
+}
 }
 
-@property --cd-start-shine {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 35%;
-}
-@property --cd-end-shine {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 65%;
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: radial-gradient(circle, #3b3b3b, #000000);
+    color: #ffffff;
+  }
+
+  body > section {
+    background-color: #333333;
+    border-color: #444444;
+  }
+
+  h1 {
+    color: #ffffff;
+  }
+
+
+  section section > div {
+    outline: #ffffff 4px dotted;
+  }
 }
 
-@property --record-status {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #efefefb5;
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffffff;
+    color: #1a1a1a;
+  }
+
+  body > section {
+    background: linear-gradient(180deg, #a5a5a58a, #818181ab), url(/images/brushed_texture.png);
+    border-color: #cccccc;
+
+  }
+
+  h1 {
+    color: #000000;
+  }
+
+
+  section section > div {
+    outline: #000000 4px dotted;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 
 @keyframes spin {
   0% {
