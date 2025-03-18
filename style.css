@@ -5,7 +5,12 @@
    [ ] - Teskt in cd cooper maken
    [ ] - Button SVG's stylen
    [ ] - Button click effect met beetje transparantie voor diepte toevoegen
-     
+   [ ] - in readme aangeven wat concept is
+   [ ] - foto's in readme en uitleg wat mijn favo stukken zijn
+   [ ] - waar ben ik trots op
+   [ ] - wat heb ik geleerd
+   [ ] - technieken gebruik
+
 
 
 
@@ -64,6 +69,12 @@ body {
   background-color: rgb(58, 58, 58);
 }
 
+svg {
+  fill: #231f20;
+  stroke-width: 0px;
+  scale: 0.6;
+}
+
 /* ------------------ */
 /* @PROPERTY */
 /* ------------------ */
@@ -117,6 +128,16 @@ body {
   initial-value: #d2d2d2b5;
 }
 
+@property --record_blur_switch {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 1px;
+}
+@property --record_blur_status {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 40px;
+}
 /* ------------------ */
 /* @KEYFRAMES */
 /* ------------------ */
@@ -151,6 +172,30 @@ body {
   }
 }
 
+
+
+/* -------------------------------------------------- */
+/* 3 Main buttons check state + style connection */
+/* -------------------------------------------------- */
+
+html:has([value="stop"]:checked) {
+  --pressureStop: true;
+}
+
+html:has([value="record"]:checked) {
+  --pressureRecord: true;
+  --recordingStatus: true;
+}
+
+html:has([value="play"]:checked) {
+  --pressurePlay: true;
+}
+
+
+/* -------------------------------- */
+/* DESKTOP CODE + Herbruikbare code */
+/* -------------------------------- */
+
 /* OPZET VOOR CONTROLPANEEL */
 body > section {
   width: 400px;
@@ -184,11 +229,7 @@ section > section:last-child input[type="radio"] {
 
 
 
-svg {
-  fill: #231f20;
-  stroke-width: 0px;
-  scale: 0.6;
-}
+
 
 /* principe animatie samen bedacht met Roel,
 later Sanne geholpen om de fadeout animatie te laten werken. 
@@ -226,18 +267,7 @@ label:has([value="record"]) {
   } */
 }
 
-html:has([value="stop"]:checked) {
-  --pressureStop: true;
-}
 
-html:has([value="record"]:checked) {
-  --pressureRecord: true;
-  --recordingStatus: true;
-}
-
-html:has([value="play"]:checked) {
-  --pressurePlay: true;
-}
 
 body section section div {
    animation: degrees-shine 8s infinite forwards linear;
@@ -347,16 +377,7 @@ section section > div::after{
   }
 }
 
-@property --record_blur_switch {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 1px;
-}
-@property --record_blur_status {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 40px;
-}
+
 
 
 
@@ -446,8 +467,9 @@ section section div div {
 
 
 
-
-
+/* ------------------------ */
+/* RESPONSIVE Media Queries */
+/* ------------------------ */
 
 @media screen and (max-width: 580px) {
   body > section {
@@ -527,6 +549,9 @@ body > section {
 }
 }
 
+/* ------------------------ */
+/* DARK & LIGHT MODE */
+/* ------------------------ */
 
 @media (prefers-color-scheme: dark) {
   body {
