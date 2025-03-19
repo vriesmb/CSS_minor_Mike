@@ -108,9 +108,6 @@ Ik ben uiteindelijk gegaan voor een blur en font-weight variable effect. Als de 
 
 
 
-# Conceptuitwerking
-
-
 # Persoonlijke Notes van gesprekken & les
 
 ### CSS & Feedback van Sanne
