@@ -22,29 +22,6 @@ h1 {
   transform: translate3d(0, 0, 0) rotateX(var(--Xrotation)) rotateY(var(--Yrotation));
 }
 
-/* @keyframes rotateHeading {
-  0%, 100% {
-    --Xrotation: 0deg;
-    --Yrotation: 0deg;
-  }
-
-  10% {
-    --Xrotation: 35deg;
-    --Yrotation: 10deg;
-  }
-
-  50% {
-    --Xrotation: 45deg;
-    --Yrotation: 60deg;
-  }
-
-  90% {
-    --Xrotation: 10deg;
-    --Yrotation: -15deg;
-  }
-  
-} */
-
 h1, p{
   font-weight:  var(--font-weight-variable);
   filter: blur(var(--textBlur));
@@ -155,6 +132,12 @@ p{
   initial-value: 0;
 }
 
+@property --opacityRecIcon {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
 /* @property --Yrotation {
   syntax: "<angle>";
   inherits: true;
@@ -186,7 +169,7 @@ p{
   }
 }
 
-@keyframes record_blink {
+@keyframes switch_blink {
   0%, 100% {
     --record_blur_switch: 1px;
     --record_blur_status: 40px;
@@ -203,6 +186,14 @@ p{
 
   100% {
     --degrees-shine: 360deg;
+  }
+}
+
+@keyframes opacityChangerRecIcon {
+  from {
+    --opacityRecIcon: 1;
+  } to {
+    --opacityRecIcon: 0;
   }
 }
 
@@ -372,12 +363,11 @@ section section > div::after{
    
   }
 
-  label:has([value="record"]) svg{
+  label:has([value="record"]) div{
     --record-status: red;
     fill: var(--record-status);
-    filter: blur(1px);
     box-shadow: 0 0 var(--record_blur_switch) rgb(255, 0, 0);
-    animation: record_blink 2s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+    animation: switch_blink 2s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
     animation-delay: 2s;
     border-radius: 50%;
   }
@@ -388,7 +378,7 @@ section section > div::after{
 
   section section > div{
     box-shadow: 0 0 var(--record_blur_status) #f008;
-    animation: record_blink 1s infinite;
+    animation: switch_blink 1s infinite;
   }
   
   label:has([value="play"]) {
@@ -418,6 +408,21 @@ section section > div::after{
     animation: degrees-shine 8s infinite forwards linear;
     /* rotate: var(--degrees-shine); */
   }
+
+
+  section section:last-of-type label:first-of-type{
+  
+  div{
+    background-color: red;
+  
+    & img {
+      animation: opacityChangerRecIcon 1s infinite alternate;
+      animation-play-state: running;
+      opacity: var(--opacityRecIcon);
+    }
+  }
+  }
+
 }
 
 
@@ -530,7 +535,32 @@ section section div div:last-of-type {
 }
 
 
+section section:last-of-type label:first-of-type{
+  display: flex;
+  justify-content: center;
 
+div{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  margin-top: 17%;
+  position: relative;
+  overflow: hidden;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    animation: opacityChangerRecIcon 1s infinite alternate;
+    animation-play-state: paused;
+    opacity: var(--opacityRecIcon);
+    top: 0;
+    left: 0;
+  }
+
+}
+
+}
 
 
 /* ------------------------ */
@@ -587,6 +617,14 @@ section section div div:last-of-type {
   svg{
     scale: 0.45;
   }
+
+  section section:last-of-type label:first-of-type {
+    div {
+        width: 3rem;
+        height: 3rem;
+        margin-top: 0px;
+        }
+  }
 }
 
 
@@ -608,9 +646,6 @@ section section div div:last-of-type {
     box-shadow: 0 0 20px rgb(0 0 0 / 9%), 0 2px 2px 1px rgb(0 0 0 / 18%);
     transition: all 0.2s, --pressure-color 0.2s;
 }
-
-
-
 
 
   section > section:last-child {
@@ -642,6 +677,7 @@ body > section {
 h1{
   font-size: 10vw;
 }
+
 }
 
 /* ------------------------ */

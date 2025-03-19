@@ -94,6 +94,17 @@ Uiteindelijk had ik een beetje spijt dat ik geen 3D had gebruikt verder en daaro
 
 Ik ben uiteindelijk gegaan voor een blur en font-weight variable effect. Als de weight dunner wordt ziet hij er verder weg uit (zeker als ik blur toevoeg) en andersom ook.. als de weight dikker wordt ziet hij er dichterbij uit (helemaal als ik de blur er dan af haal). Samen geeft het het effect van een soort camera uit die tijd (van de CD walkman) dat beelden scherp moesten stellen. OOkwel, een letterlijk diepte effect. Ook had je op veel stereo's dat cijfers en letter een soort stroom fade in fade out hadden in het UI. Dit effect boots je dan een beetje na via het diepte effect ook doordat de opacity naar 0 gaat.
 
+![Setup](/images/7.1.png)
+![Setup](/images/7.2.png)
+Ook heb ik gedacht aan een responsive layout.
+En heb ik gelet op de gradient dat hij de goede kant op staat, als de rotations van het device veranderd.
+
+![Setup](/images/8.png)
+Tot slot heb ik nog om wat meer op de details te zitten.. de record button meer feedback en styling gegeven. Nu komt de recording blink echt achter de knop vandaan en heeft een blur omdat het in het echt ook als een vrij helder lichtje zou ervaren. Daarnaast heeft de button zelf ook een gegraveerde stijl gekregen met brushed metal.
+
+![Setup](/images/9.png)
+Laaste detail. de grafering wat meer darkness. 
+Nu zie je beter diepte.
 
 
 # Detail uitwerkingen elementen
@@ -106,6 +117,12 @@ Ik ben uiteindelijk gegaan voor een blur en font-weight variable effect. Als de 
 6. 3 buttons zijn klikbaar en hebben feedback en feedforward. hebben een diepte effect door stapeling gradient en diepte 3d. door hele subtiele box shadows krijg je echt een soort knop omlijning en scheiden tussen elkaar. timing en snelheid spelen ook grote rol. ze worde normaal ingedrukt en springen als het waren snel terug naar hun startpositie als een andere knop ingedrukt wordt.
 7. tekst op cd draait perfect rond door juist origin points. 
 
+
+# Rauwe schets van idee
+![Setup](/images/rauwe_schets_idee.jpg)
+
+# Eerste knoppen ontwerp hahah
+![Setup](/images/4maart.png)
 
 
 # Persoonlijke Notes van gesprekken & les
