@@ -237,7 +237,7 @@ body > section {
   border: black solid 4px;
   background-color: rgb(161, 161, 161);
   background: linear-gradient(180deg, #0000008a, #000000ab),
-    url(/images/brushed_texture.png);
+    url(./images/brushed_texture.png);
 }
 
 /* / 1E SECTIE VAN CONTROLAPNEEL */
@@ -279,7 +279,7 @@ label:has([value="record"]) {
   background: var(--pressure-color);
   height: 100px;
   background: linear-gradient(to bottom, #65656525, var(--pressure-color)),
-    url(/images/brushed_texture.png);
+    url(./images/brushed_texture.png);
   background-size: 100%;
   background-position: top;
   width: 100%;
@@ -565,7 +565,7 @@ section section div div:last-of-type {
 
   label:has([value="stop"]), label:has([value="play"]), label:has([value="record"]) {
       height: 100px;
-      background: linear-gradient(to right, #65656596, var(--pressure-color)), url(/images/brushed_texture.png);
+      background: linear-gradient(to right, #65656596, var(--pressure-color)), url(./images/brushed_texture.png);
       background-size: 100%;
       background-position: top;
       width: 100%;
@@ -594,7 +594,7 @@ section section div div:last-of-type {
 @media screen and (max-width: 480px) {
   label:has([value="stop"]), label:has([value="play"]), label:has([value="record"]) {
     height: 100px;
-    background: linear-gradient(to bottom, #65656596, var(--pressure-color)), url(/images/brushed_texture.png);
+    background: linear-gradient(to bottom, #65656596, var(--pressure-color)), url(./images/brushed_texture.png);
     background-size: 100%;
     background-position: top;
     width: 100%;
@@ -676,7 +676,7 @@ h1{
   }
 
   body > section {
-    background: linear-gradient(180deg, #a5a5a58a, #818181ab), url(/images/brushed_texture.png);
+    background: linear-gradient(180deg, #a5a5a58a, #818181ab), url(./images/brushed_texture.png);
     border-color: #cccccc;
 
   }
