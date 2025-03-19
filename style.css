@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Cooper";
-  src: url("/fonts//Cooper.ttf") format("truetype");
+  src: url("./fonts//Cooper.ttf") format("truetype");
   font-weight: 400 900;
   font-style: normal;
 }
