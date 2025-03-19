@@ -1,33 +1,6 @@
 /* ------------------ */
-/* TO DO */
-/* ------------------ */
-/* [ ] - Heading naar cooper en animaten pas als player draait
-   [ ] - Teskt in cd cooper maken
-   [ ] - Button SVG's stylen
-   [ ] - Button click effect met beetje transparantie voor diepte toevoegen
-   [ ] - in readme aangeven wat concept is
-   [ ] - foto's in readme en uitleg wat mijn favo stukken zijn
-   [ ] - waar ben ik trots op
-   [ ] - wat heb ik geleerd
-   [ ] - technieken gebruik
-
-
-
-
-
-
-*/
-
-/* ------------------ */
 /* FONTS */
 /* ------------------ */
-
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/GeistMono_var.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
 
 @font-face {
   font-family: "Cooper";
@@ -36,22 +9,48 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "Josefin";
-  src: url("/fonts/josefin.ttf");
-  
-}
-
 /* ------------------ */
 /* ALGEMENE REGELS */
 /* ------------------ */
 
 h1 {
-  font-family: "Josefin";
-  font-size: 4.5rem;
+  font-family: "Cooper", sans-serif;
+  font-size: clamp(2.5rem, 9vw, 4rem);
+  transform-style: preserve-3d;
+  /* animation: rotateHeading 4s infinite; */
+  animation-play-state: running;
+  transform: translate3d(0, 0, 0) rotateX(var(--Xrotation)) rotateY(var(--Yrotation));
+}
+
+/* @keyframes rotateHeading {
+  0%, 100% {
+    --Xrotation: 0deg;
+    --Yrotation: 0deg;
+  }
+
+  10% {
+    --Xrotation: 35deg;
+    --Yrotation: 10deg;
+  }
+
+  50% {
+    --Xrotation: 45deg;
+    --Yrotation: 60deg;
+  }
+
+  90% {
+    --Xrotation: 10deg;
+    --Yrotation: -15deg;
+  }
+  
+} */
+
+h1, p{
   font-weight:  var(--font-weight-variable);
-  animation: fontVariation 4s linear infinite alternate;
-  color: white;
+  filter: blur(var(--textBlur));
+  opacity: var(--headingOpacity);
+  animation: fontVariation 8s infinite alternate;
+  animation-play-state: paused;
 }
 
 body {
@@ -73,6 +72,11 @@ svg {
   fill: #231f20;
   stroke-width: 0px;
   scale: 0.6;
+}
+
+p{
+  font-family: 'cooper', sans-serif;
+  font-weight: 600;
 }
 
 /* ------------------ */
@@ -138,17 +142,47 @@ svg {
   inherits: true;
   initial-value: 40px;
 }
+
+@property --textBlur {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --headingOpacity {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* @property --Yrotation {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --Xrotation {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+} */
+
+
 /* ------------------ */
 /* @KEYFRAMES */
 /* ------------------ */
 
 @keyframes fontVariation {
-  0% {
+  from {
     --font-weight-variable: 300;
+    --headingOpacity: 0;
+    --textBlur: 14px;
   }
 
-  100% {
+  to {
     --font-weight-variable: 700;
+    --textBlur: 0px;
+    --headingOpacity: 1;
   }
 }
 
@@ -241,7 +275,7 @@ en daarnaast ook de custom propertie transitionen met 0.2s --pressure-color */
 label:has([value="stop"]),
 label:has([value="play"]),
 label:has([value="record"]) {
-  --pressure-color: #787878;
+  --pressure-color: rgb(139, 139, 139);
   background: var(--pressure-color);
   height: 100px;
   background: linear-gradient(to bottom, #65656525, var(--pressure-color)),
@@ -307,6 +341,15 @@ section section > div::after{
 
 
 @container style(--pressureRecord:true) {
+  h1, p {
+    animation-play-state: running;
+    animation: fontVariation 8s infinite alternate;
+  }
+
+  h1{
+    opacity: var(--headingOpacity);
+  }
+
   label:has([value="record"]) {
     transform: translateZ(0px) rotatez(0deg);
     animation: testje 1s both;
@@ -387,6 +430,15 @@ section section > div::after{
     animation-play-state: running;
   }
 
+  h1, p {
+    animation: fontVariation 8s infinite alternate ;
+    animation-play-state: running;
+  }
+
+  h1{
+    opacity: var(--headingOpacity);
+  }
+
   label:has([value="play"]) {
     transform: translateZ(0px) rotatez(0deg);
     /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 transparent; */
@@ -450,7 +502,7 @@ body section section > div {
     );
 }
 
-section section div div {
+section section div div:first-of-type {
     height: 150px;
     width: 100px;
     transform-origin: center right;
@@ -461,6 +513,20 @@ section section div div {
     left: 10%;
     display: flex;
     align-items: center;
+}
+
+section section div div:last-of-type {
+  height: 150px;
+    width: 100px;
+    transform-origin: center left;
+    rotate: var(--degrees-shine);
+    /* animation: degrees-shine 8s infinite forwards linear; */
+    position: absolute;
+    top: 20.5%;
+    right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 
@@ -514,6 +580,10 @@ section section div div {
   
   }
 
+  h1{
+    font-size: 10vw;
+  }
+
   svg{
     scale: 0.45;
   }
@@ -522,6 +592,27 @@ section section div div {
 
 
 @media screen and (max-width: 480px) {
+  label:has([value="stop"]), label:has([value="play"]), label:has([value="record"]) {
+    height: 100px;
+    background: linear-gradient(to bottom, #65656596, var(--pressure-color)), url(/images/brushed_texture.png);
+    background-size: 100%;
+    background-position: top;
+    width: 100%;
+    height: 100%;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transform: translateZ(150px) translatex(0) translateY(0) rotatex(0deg) rotatey(0deg) rotateZ(0deg);
+    box-shadow: 0 0 20px rgb(0 0 0 / 9%), 0 2px 2px 1px rgb(0 0 0 / 18%);
+    transition: all 0.2s, --pressure-color 0.2s;
+}
+
+
+
+
+
   section > section:last-child {
     width: 100%;
     display: grid;
@@ -546,6 +637,10 @@ body > section {
   gap: 4rem;
   height: fit-content;
   padding-top: 3rem;
+}
+
+h1{
+  font-size: 10vw;
 }
 }
 
@@ -588,6 +683,10 @@ body > section {
 
   h1 {
     color: #000000;
+  }
+
+  p {
+    color: silver;
   }
 
 

@@ -1,37 +1,117 @@
 # Sanne heeft gezegd dat responsive huidige methode okey is voor mij, ik snap het principe maar kon niet meer ombouwen door hergebruik van elementen. Volgende project gewoon: klein beginnnen en hoe groter je gaat min-width gebruiken op @media.
 
+# Bronnnen Note: Ik kan heleaas, naja positief eigenlijk, geen linkjes geven. Want heb die niet gebruikt. Kan wel zeggen dat ik veel gesproken heb met Roel, Nils en Sanne + MDN uiteraard. Maar code overnemen, hergebruiken of iets dergelijks afkomstig van een ander.. nope.
+
 # CSS Technieken
 
-- [x] :has()
-- [x] Style (container queries)
+## Geleerd
+- [x] @Property custom properties
+      Gebruikt op o.a. anlges/degrees, kleuren, gradients/percentages, groottes/blurs/lengths en font-weights.
+      Voorheen onwennig, maar nu gebruik ik het alsof het de olie van mijn code is. 'Overal' stop ik ze waar mogelijk (en waar logisch is) om mijn workflow te verbeteren, flexibiliteit toe te voegen en de mogelijkheid te creeeren om te animeren.
+- [x] @Container style queries (met custom properties)
+      Super fijn om mee te werken. Scheelt je (JS) code, ontzettend bruikbaar, efficient en goed leesbaar.
+- [x] @Keyframes (meer gewenning en eerder de keuze om te animeren, normaal deed ik dit amper, nu ik custom properties ken ging/gaat er een wereld voor me open)
+- [x] Animate play state - wist ook niet dat dit bestond. Als je het eenmaal door hebt goed te gebruiken. Je moet goed nadenken over de default state. anders kun je dagen vastlopen op het feit dat hij niet precies doet wat jij wilt omdat je ergens een state mist of onjuist hebt.
+- [x] :has selector (ook in combinatie met [value=""]) is iets waar ik niet eens het bestaan van af wist. Nu gebruik ik het met gemak en veel plezier, normaal zou ik hier JS voor inschakelen nu is dat niet meer nodig.
+- [x] Transform 3D minimaal. Ik had hier graag meer van willen doen, maar enkel mee ge-expirimenteerd en door andere prioriteiten en bugs en technieken geen tijd voor gehad diep in te duiken en daadwerkelijk echt te gaan gebruiken voor grotere dingen.
+- [x] transform-origin : voor soort anchor point plaatsing. kan hem vervolgens om zijn as draaien, mits de parent relative is.
+- [x] Gebruik maken van &after en &before, heb ik eerder nooit echt gebruikt. 
+      Begreep het nooit en nu vind ik het logisch en goed bruikbaar.
+- [x] CSS Nesting 
+      Echt top. Wist voorheen niet dat dit mogelijk is. Prettig voor overzicht en werkt fijn.
+- [x] Experimenteren met nieuwe code, itereren en soms delen die wel lukken te gebruiken, maar ook door te ontwikkelen totdat iets werkt zoals je wilt. Klink cliché, maar ben me echt telkens gaan verdiepen in de technieken en heb ontzettend veel workshops meegedaan en ben graag met de docenten gaan zitten om het uit te pluisen.. ook omdat ik het heel graag goed wilde doen om de technieken onder de knie te krijgen.
+- [x] Clamp, in tekst grootte - voor responsiveness
 
-  > /_ styling .card based on the value of --theme on .card-container _/
-  > @container style(--theme: warm) {
-  > .card {
-  > background-color: wheat;
-  > border-color: brown;
-  > ...
-  > }
-  > }
+## Had nog willen doen
+- [ ] (Custm)sliders met values en steps en die waarde dan gebruiken bij een ander element als waarde-input  
+      Wél workshop voor gevolgd en meegedaan, geen tijd voor implementatie, door nette code en netjes willen uitvoeren van huidige functionaliteit(en).
+- [ ] Extra interacties/knoppen op control panel en op de achtergrond wat effecten, maar heb zo de focus gelegd op het JUIST leren en begrjpen van mijn huidige code en functionaliteiten dat ik daar niet aan toe gekomen ben. Was het me eerlijkgezegd ook niet waard. Voorheen deed ik dat altijd wel, zo veel mogelijk maken. Maar ben blij dat ik het op de huidige manier heb aangepakt. Ik heb veel kwalitatieve dingen geleerd en ben super trots op de progressie.
 
-- [x] Custom Properties
-- [x] 3D Transforms
 
 # Conceptuitwerking
 
-Video/Audio player met customizable visualiser op de achtergrond.
+CD Speler met een herkenbaar uiterlijk.
+Ik wil track id kunnen displayen op een originele manier.
+Er moeten buttons komen waar je echt de diepte van ziet als je ze indrukt.
+Ze moeten affordance hebben. Moet er herkenbaar uitzien als een knop en de states moeten dat ook zijn.
+Bij het klikken en terugspringen van de knop moet het er mechanisch uitzien.
 
-Ik wil met het uiterlijk van de player op detail ingaan.
-
+## Conceptuitwerking
+Dus de punten van uiterlijk zijn:
 - Knoppen krijgen diepte, bij indrukken.
 - Knoppen krijgen een herkenbare beweging bij het indrukken en terugspringen.
 - Player krijgt een herkenbaar uiterlijk & affordance
 
 De player kan gestart worden, gestopt worden, maar ook opnemen. Alle 3 de inputs krijgen andere details.
+Ook moet je tijdens het spelen kunnen opnemen zonder dat er iets verspringd. Ook moet het andersom werken: als je opneemt gaat hij meteen spelen.
 
-Mocht ik tijd hebben wil ik de achtergrond customizable maken met sliders.
 
-# Notes
+# Opgeslagen experimenten
+"Dit zijn tegelijkertijd ook mijn eigen notes, waar ik mezelf uitleg hoe het werkt"
+
+![Setup](/images/1.1.png)
+> Eerste :has gebruik in mijn project. 
+Dit experiment is het gevolg van een mislukt experiment met SVG FIlters. Ik wilde namelij 3 knoppen met geborsteld metaal als uiterlijk. Ik heb hier lang naar zitten zoeken. Ik kreeg het voor elkaar om een knop te krijgen met een SVG met wat noise toegevoegd. Maar de genoisde achtergrond zag er niet uit als beborsteld metaal. Vandaar dat ik ben gaan kijken naar gradients combineren, maar dit gaf veel overlappen en gaf me niet de strakke structuur die ik zocht. Uiteindelijk ben ik gegaan voor een background image die de texture heeft, waar ik bovenop wat gradients stapel + een 3d transform + een background image scale zodat het er allemaal samen uitziet 'alsof' hijecht ingedrukt wordt. Daarnaast springt hij sneller terug, dan dat hij wordt ingedrukt (ook zoals in het echt - dat 'mechanische').
+
+![Setup](/images/1.2.png)
+D.m.v. de :has i.c.m. de value en :checked state kan ik zien welke 'input' is ingedrukt.. zodat ik een status kan meegeven. Later in de code kan ik dan deze status gebruiken als conditie op styling van meerdere elementen.
+
+![Setup](/images/1.3.png)
+Hier zie je dat mijn style queries worden toegepast a.d.h.v. de 'pressure' status.
+
+![Setup](/images/1.4.png)
+Hier maak ik mijn eerste @properties ooit aan.
+Ik had geleerd van Sanne dat er verschillende types zijn waar je de propertie mee kunt vullen. Je geeft een syntax mee zodat de waardes van properties straks geanimeerd/veranderd kunnen worden. Dat is ook wat ik doe. In dit voorbeeld heb ik de sytax op color gezet omdat de kleur van mijn gradient, van de button waarop je klikt, moet veranderen. Want als je simpelwel enkel een gradient zou gaan toevoegen dan ziet dat er niet smooth en custom uit. Vandaar dat de gradient er dus altijd al op zit, maar dat je de kleur en/of de percentages van de gradient aanpast.
+
+![Setup](/images/1.5.png)
+Hier zie je mijn gradient experiment. Ik wilde de 'shine' op een cd naabootsen met een bewegende lichtinval. Hier ging ik dus de percentages van de color punten aanpassen.
+
+![Setup](/images/2.png)
+Met dit als resultaat.
+Ik ben hier later weer vanaf gestapt en heb gekozen voor een custom cd design met paths voor de kringen van de CD en een 'static' shine, die wel ronddraait.
+
+![Setup](/images/3.png)
+Deze foto nog even tussendoor. Ik heb lang vastgelopen bij de gradients stapelen. Volgorde maakt echt uit. Bij mij gingen de gradient door elkaar heen en de een maakte de anders transparant. Dus uiteindelijk de fix gevonden door ze om te draaien. Commented graddient area was het eerst (de foutieve versie).
+
+![Setup](/images/4.png)
+Hier begint mij speler al enigszins vorm te krijgen.
+Ik ben later tekst gaan toevoegen in de speler. Ik had de gedachte (zoals in mijn videobewerkings-software) om een anchor punt in te stellen zodat een element om een zelf gespicificeerde as heen kan draaien.
+En toen kwam ik op transform origin. En in dat voorbeeld op MDN visualiseerde ze de box met een anchor punt. Zo wist ik zeker dat het mogelijk was. Nou, weer keframes maken, custom propertie creeeren.
+
+![Setup](/images/4.2.png) Link afbeelding bron
+https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
+
+
+![Setup](/images/4.1.png)
+Hier zie je de code voor 1 woord bij first of type. later heb ik een tweede toegevoegd en dus last of type gebruikt, met precies het tegenovergesteld principe op de origin, zodat ze tegenover elkaar zouden staan en samen konden roteren om de gewenste as op het middelpunt v/d CD.
+
+![Setup](/images/5.1.png)
+![Setup](/images/5.2.png)
+Uiteindelijk had ik een beetje spijt dat ik geen 3D had gebruikt verder en daarom wilde ik mijn tekst gaan doen. Echter zag dit er gewoon echt niet uit! 
+
+![Setup](/images/5.3.png)
+![Setup](/images/5.4.png)
+
+Ik ben uiteindelijk gegaan voor een blur en font-weight variable effect. Als de weight dunner wordt ziet hij er verder weg uit (zeker als ik blur toevoeg) en andersom ook.. als de weight dikker wordt ziet hij er dichterbij uit (helemaal als ik de blur er dan af haal). Samen geeft het het effect van een soort camera uit die tijd (van de CD walkman) dat beelden scherp moesten stellen. OOkwel, een letterlijk diepte effect. Ook had je op veel stereo's dat cijfers en letter een soort stroom fade in fade out hadden in het UI. Dit effect boots je dan een beetje na via het diepte effect ook doordat de opacity naar 0 gaat.
+
+
+
+# Detail uitwerkingen elementen
+
+1. Record button blink op rode lichtje.
+2. Text draait in cd
+3. Cd styling met path ipv png
+4. Gradient draait met custom propertie en keyframes
+5. heading + p element zijn geanimeerd. P op cd als een soort laser tekst en heading als een semi-digitaal fade in en out tekstje. 
+6. 3 buttons zijn klikbaar en hebben feedback en feedforward. hebben een diepte effect door stapeling gradient en diepte 3d. door hele subtiele box shadows krijg je echt een soort knop omlijning en scheiden tussen elkaar. timing en snelheid spelen ook grote rol. ze worde normaal ingedrukt en springen als het waren snel terug naar hun startpositie als een andere knop ingedrukt wordt.
+7. tekst op cd draait perfect rond door juist origin points. 
+
+
+
+# Conceptuitwerking
+
+
+# Persoonlijke Notes van gesprekken & les
 
 ### CSS & Feedback van Sanne
 
